@@ -1,47 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Excersie_2 {
+namespace ConsoleApp2 {
+    enum Mode {
+        Mulitply, Percentage
+    }
     class Program {
         static void Main(string[] args) {
 
-            var listInput = new List<string>();
+            var mode = Mode.Mulitply; 
 
-            var inpuut = true;
-            do {
-                Console.WriteLine("Lägg till en rad: ");
-                var input = Console.ReadLine();
-                if (input == "q" || input == "quit") {
+            decimal X, Y;
 
-                    break;
+            Console.WriteLine("X:");
+            var inputX = Console.ReadLine();
+            Console.WriteLine("Y:");
+            var inputY = Console.ReadLine();
 
+
+
+            if (!decimal.TryParse(inputX, out X) || !decimal.TryParse(inputY, out Y)) {
+
+                Console.WriteLine("Error");
+            } else {
+
+                Console.WriteLine(@" Resultat " + X.ToString("N3") + "\n" + "\t" + Y.ToString("N3"));
+                decimal result;
+
+                Console.WriteLine("Mode: ");
+                var inputMode = Console.ReadLine();
+
+                if (inputMode == "percent") {
+                    mode = Mode.Percentage;
+                } else if (inputMode == "multiply") {
+                    mode = Mode.Mulitply;
+                }
+
+                
+                if (mode == Mode.Mulitply) {
+                    result = X * Y;
 
                 } else {
-                    listInput.Add(input);
+                    result = X / Y; 
                 }
 
-            }
-            while (inpuut);
-
-            Console.WriteLine("Filter: ");
-            var filter = Console.ReadLine();
-            foreach (var listName in listInput) {
-                if(listName.StartsWith(filter)) {
-
-                    Console.WriteLine(listName);
-                }
-               
+                Console.WriteLine("Resultat: " + result.ToString(mode == Mode.Percentage ? "P2" : "N3")); 
 
             }
-
             Console.ReadKey();
-            
+
+
+
+
+
+        
+
         }
-    }         
+    }
 }
-          
-
-        
-
-        
-   
