@@ -25,10 +25,15 @@ namespace Excersie_2 {
 
             Console.WriteLine("Filter: ");
             var filter = Console.ReadLine();
+            
             foreach (var listName in listInput) {
                 if(listName.StartsWith(filter)) {
+                    string[] parts = listName.Split(','); 
+                    foreach (var part in parts) {
 
-                    Console.WriteLine(listName);
+                        Console.WriteLine(part);
+                    }
+                   
                 }
                
 
